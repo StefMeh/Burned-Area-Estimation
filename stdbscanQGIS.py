@@ -54,8 +54,8 @@ processing.run("native:createpointslayerfromtable",{'INPUT':input_csv,
 
 processing.run("native:reprojectlayer",
                {'INPUT':afd_pts,
-                'TARGET_CRS':QgsCoordinateReferenceSystem('EPSG:32637'),                                                              # Adjust parameters for study area!
-                'OPERATION':'+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=37 +ellps=WGS84',    # Adjust parameters for study area!
+                'TARGET_CRS':QgsCoordinateReferenceSystem('EPSG:32637'),                                                              # Adjust projection parameters for study area!
+                'OPERATION':'+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=37 +ellps=WGS84',    # Adjust projection parameters for study area!
                 'OUTPUT':afd_pts23637})
 
 #Extract AFDs for smaller study area other than country-level#
