@@ -1,6 +1,9 @@
+### Import os package & specify working directory ###
 import os
 os.chdir(r'C:\Users\user\Documents\...\BA_dNBR') # <-- Specify working directory here!!!
+# BA_dNBR directory contains GEE dNBR output files (.tif format) #
 
+### Import packages from QGIS ###
 from qgis._analysis import QgsNativeAlgorithms
 import processing
 from processing.core.Processing import Processing
@@ -12,7 +15,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtCore import QVariant
 from PyQt5 import QtCore
 
-
 from qgis.core import (
     QgsVectorLayer,
     QgsFeature,
@@ -23,13 +25,16 @@ from qgis.core import (
     QgsCoordinateReferenceSystem
 )
 
+### Import gdal package ###
 from osgeo import gdal, ogr, osr
 
+### Access dNBR.tif files in working directory ###
 for file in os.listdir(os.getcwd()):
     if file.startswith('dNBR') & file.endswith('.tif'):
 
         clusterId = file.split('_')[-1].split('.')[0]
 
+        # Reclassify raster: dNBR is classified as 'Burn' (1) or 'No Burn' (0) #
         processing.run("native:reclassifybytable",
                        {'INPUT_RASTER':os.path.join(os.getcwd(), file),
                         'RASTER_BAND':1,
@@ -40,7 +45,7 @@ for file in os.listdir(os.getcwd()):
                         'DATA_TYPE':2,
                         'OUTPUT':'BA'+clusterId+'.tif'})
 
-
+        # Convert .tif to .shp file #
         src_ds = gdal.Open('BA'+clusterId+'.tif')
         srcband = src_ds.GetRasterBand(1)
         dst_layername = 'BA'
@@ -61,18 +66,16 @@ for file in os.listdir(os.getcwd()):
         del src_ds
         del dst_ds
 
+        # 
         processing.run("native:reprojectlayer",
                {'INPUT':'BA'+clusterId+'.shp',
                 'TARGET_CRS':QgsCoordinateReferenceSystem('EPSG:32637'),
                 'OPERATION':'+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=37 +ellps=WGS84',
                 'OUTPUT':'BAProj'+clusterId+'.shp'})
 
+        # Remove 'No Burn' class from .shp file #
         layer = QgsVectorLayer('BAProj'+clusterId+'.shp', "BA"+clusterId, "ogr")
-
-        layer.startEditing()
-
-        layer.startEditing()
-        
+        layer.startEditing()        
         selection = QgsFeatureRequest().setFilterExpression('"BA(sqkm)" != 1')
 
         for feature in layer.getFeatures(selection):
