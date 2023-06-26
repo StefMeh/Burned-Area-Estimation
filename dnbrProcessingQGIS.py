@@ -1,5 +1,5 @@
 import os
-os.chdir(r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\QGIS_Scripts\BA_dNBR') # <-- Specify working directory here!!!
+os.chdir(r'C:\Users\user\Documents\...\BA_dNBR') # <-- Specify working directory here!!!
 
 from qgis._analysis import QgsNativeAlgorithms
 import processing
