@@ -1,3 +1,5 @@
+var fireApprox = ee.FeatureCollection("users/sm0162/GEEFile");
+
 // Cluster envelope layers
 Map.addLayer(fireApprox, {color: 'f04020'}, 'MFR Clusters Fires');
 
