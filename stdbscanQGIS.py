@@ -1,6 +1,8 @@
+### Import os package & specify working directory ###
 import os
-os.chdir(r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\VIIRS_Fires') # <-- Specify working directory here!!!
+os.chdir(r'C:\Users\user\Documents\.....\BA') # <-- Specify working directory here!!!
 
+### Import packages from QGIS ###
 from qgis._analysis import QgsNativeAlgorithms
 import processing
 from processing.core.Processing import Processing
@@ -11,7 +13,6 @@ QgsApplication.processingRegistry().addProvider(QgsNativeAlgorithms())
 from PyQt5.QtCore import *
 from PyQt5.QtCore import QVariant
 from PyQt5 import QtCore
-
 
 from qgis.core import (
     QgsVectorLayer,
@@ -24,19 +25,20 @@ from qgis.core import (
 
 
 ### Files ###
-#input_csv = 'MFR_Fire_HS_Table2012.csv' # <-- NASA FIRMS VIIRS AFD.csv file
-input_csv = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\VIIRS_Fires\viirs_2012_Kenya.csv' # <-- NASA FIRMS VIIRS AFD.csv file for Kenya
-study_area_shp = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\MFR_Forest\Forest_Reserve\MFR_Forest_Reserve.shp'
+input_csv = r'C:\Users\user\Documents\....\viirs_2012_Kenya.csv' # <-- NASA FIRMS VIIRS AFD.csv file for Kenya: Download: https://firms.modaps.eosdis.nasa.gov/country/
+study_area_shp = r'C:\Users\user\Documents\...\StudyArea.shp' # <-- Shapefile of specific study area to clip AFDs (if applicable)
 
-afd_pts = 'AFDs(EPSG4326).shp'
-afd_pts23637 = 'AFDs(EPSG32637).shp'
-afd_pts23637clip = 'AFDs(EPSG32637)Clip.shp'
-clusters = 'stdbscan.shp'
-cluster_buffers = 'stdbscanBuffers.shp'
-cluster_buffers_dissolve = 'stdbscanBuffersDissolve.shp'
-cluster_info = 'stdbscanClusterInfo.shp'
-finalOutput = 'finalOutput.shp'
-GEEUploadFile = 'GEEFile(EPSG4326).shp'
+### Naming of Output Files ###
+# File names can be changed here #
+afd_pts = 'AFDs(EPSG4326).shp'                              # <-- AFD Point Shapefile: Generated from AFD Table (Coordinate system: WGS 84)
+afd_pts23637 = 'AFDs(EPSG32637).shp'                        # <-- AFD Point Shapefile Projection (WGS 84 / UTM Zone 37N -> Kenya)
+afd_pts23637clip = 'AFDs(EPSG32637)Clip.shp'                # <-- AFDs clipped to Study Area
+clusters = 'stdbscan.shp'                                   # <-- Spation-temporal clustering output of AFDs using ST-DBSCAN Algorithm in QGIS (Tool: ST-DBSCAN Clustering)
+cluster_buffers = 'stdbscanBuffers.shp'                     # <-- Buffers around AFD clusters (area approximation)
+cluster_buffers_dissolve = 'stdbscanBuffersDissolve.shp'    #
+cluster_info = 'stdbscanClusterInfo.shp'                    #
+finalOutput = 'finalOutput.shp'                             # <-- AFD clusters associated with area (buffers) & information from clustering.
+GEEUploadFile = 'GEEFile(EPSG4326).shp'                     # <-- Final file to be uploaded into GEE Asset (Coordinate System: WGS 84)
 
 ###Convert AFD.csv file into point layer (.shp file format)###
 #Table to Point Layer#
@@ -52,11 +54,12 @@ processing.run("native:createpointslayerfromtable",{'INPUT':input_csv,
 
 processing.run("native:reprojectlayer",
                {'INPUT':afd_pts,
-                'TARGET_CRS':QgsCoordinateReferenceSystem('EPSG:32637'),
-                'OPERATION':'+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=37 +ellps=WGS84',
+                'TARGET_CRS':QgsCoordinateReferenceSystem('EPSG:32637'),                                                              # Adjust parameters for study area!
+                'OPERATION':'+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=37 +ellps=WGS84',    # Adjust parameters for study area!
                 'OUTPUT':afd_pts23637})
 
-#Extract AFDs for smaller study area than the country-level#
+#Extract AFDs for smaller study area other than country-level#
+# Comment out step if not required #
 processing.run("native:extractbylocation",
                {'INPUT':afd_pts23637,
                 'PREDICATE':[0],
@@ -66,16 +69,17 @@ processing.run("native:extractbylocation",
 
 layer = QgsVectorLayer(afd_pts23637clip, "VIIRS AFDs", "ogr")
 
-### Adds new field to shp file to store dates in date format ###
+#layer = QgsVectorLayer(afd_pts23637, "VIIRS AFDs", "ogr")    # !!! Uncomment & comment line above if AFDs were not clipped !!!
 
-#Add field in date format#
+
+### Adds new field to shp file to store dates in DATE FORMAT ###
+#Add Field#
 layer_provider=layer.dataProvider()
 layer_provider.addAttributes([QgsField("Date",QVariant.Date)])
 layer.updateFields()
 
-#Edit field#
+#Edit Field#
 layer.startEditing()
-
 for feature in layer.getFeatures():
     id = feature.id()
 
@@ -87,19 +91,18 @@ for feature in layer.getFeatures():
     
     attr_value = {layer.fields().lookupField('Date'):qtDate}
     layer_provider.changeAttributeValues({id:attr_value})
-
 layer.commitChanges()
 
 
 ### Performs ST-DBSCAN clustering of AFD pts ###
-
 processing.run("native:stdbscanclustering",
                { 'DATETIME_FIELD' : 'Date',
                  'DBSCAN*' : False,
-                 'EPS' : 750,                           # <-- Spatial Threshold
+                 'EPS' : 750,                           # <-- Spatial Threshold: 750 meters
                  'EPS2' : 691200000,                    # <-- Temporal Threshold (millieseconds) = 8 days
                  'FIELD_NAME' : 'CLUSTER_ID',
                  'INPUT' : afd_pts23637clip,
+                 #'INPUT' : afd_pts23637,            # !!! Uncomment & comment line above if AFDs were not clipped !!!
                  'MIN_SIZE' : 1,
                  'OUTPUT' : clusters,
                  'SIZE_FIELD_NAME' : 'CLUSTER_SIZE' })
