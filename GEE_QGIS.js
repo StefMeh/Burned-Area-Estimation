@@ -1,4 +1,4 @@
-var fireApprox = ee.FeatureCollection("users/sm0162/GEEFile");
+var fireApprox = ee.FeatureCollection("users/user/GEEUploadFile");
 
 // Cluster envelope layers
 Map.addLayer(fireApprox, {color: 'f04020'}, 'MFR Clusters Fires');
@@ -52,13 +52,11 @@ var prepareDNBRGeneration = function (envelope) {
   envelope = ee.Feature(envelope);
   // Which layer?
   var layerName = envelope.get('layerName');
-  // print('layerName', layerName);
-
+  
   // Get Unique Feature ID
   var featID = envelope.get('CLUSTER_ID');
-  // print('featID', featID);
   
-    // Pre-fire start and end date definition
+  // Pre-fire start and end date definition
   var cluster_start_date = ee.Date(envelope.get('Date'));
   var pre_fire_start_date = (cluster_start_date.advance(-120, 'day'));
   var pre_fire_end_date = (cluster_start_date.advance(-1, 'day'));
@@ -69,58 +67,30 @@ var prepareDNBRGeneration = function (envelope) {
   var post_fire_end_date = (cluster_end_date.advance(120, 'day'));
 
   var preImageL7 = L7.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
-  // print('preImageL7', preImageL7);
-  // preImageL7 = preImageL7.map(mask_landsat);
   var preImageL8 = L8.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
-  // print('preImageL8', preImageL8)
-  // preImageL8 = preImageL8.map(mask_landsat);
   var preImage = ee.Algorithms.If(preImageL8.size().eq(0), preImageL7, preImageL7.merge(preImageL8));
   preImage = ee.ImageCollection(preImage).map(mask_landsat);
-  // print('preImage', preImage)
-  // var preImage = ee.Algorithms.If(preImageL8.size().eq(0), preImageL7, preImageL7.merge(preImageL8));
-  // var preImage = preImageL7.merge(preImageL8);
+
 
   var postImageL7 = L7.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
-  // print('postImageL7', postImageL7);
-  // postImageL7 = postImageL7.map(mask_landsat);
   var postImageL8 = L8.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
-  // print('postImageL8', postImageL8);
-  // postImageL8 = postImageL8.map(mask_landsat);
-  // var postImage = postImageL7.merge(postImageL8);
-  // var postImage = ee.Algorithms.If(postImageL8.size().eq(0), postImageL7, preImageL7.merge(postImageL8));
   var postImage = ee.Algorithms.If(postImageL8.size().eq(0), postImageL7, postImageL7.merge(postImageL8));
   postImage = ee.ImageCollection(postImage).map(mask_landsat);
-  // print('postImage', postImage)
-
+  
   preImage = preImage.map(generateNBR);
-  // preImage = preImage.qualityMosaic('NBR').multiply(1000).rename('preImage_'+ layerName + '_' + featID);
   preImage = preImage.median().multiply(1000).rename([ee.String('preImage_').cat(layerName).cat('_').cat(featID)]);
 
   postImage = postImage.map(generateNBR);
-  // postImage = postImage.qualityMosaic('NBR').multiply(1000).rename('postImage_'+ layerName + '_' + featID);
   postImage = postImage.median().multiply(1000).rename([ee.String('postImage_').cat(layerName).cat('_').cat(featID)]);
-  
-  // exportImage(preImage, 'preImage_'+ layerName + '_' + featID);
-  
+    
   var dNBR = preImage.subtract(postImage).rename([ee.String('dNBR_').cat(layerName).cat('_').cat(featID)])
-  // var image = preImage.addBands(postImage).addBands(dNBR);
   var image = dNBR
   return image.clip(envelope.geometry());
 };
 
 
-
 var listfireApprox = fireApprox.toList(fireApprox.size());
-
-// var firstFeat = bufcl.first();
-// var firstFeat = ee.Feature(listBufCl.get(2));
-// Map.addLayer(firstFeat)
-// firstFeat = prepareDNBRGeneration(firstFeat);
-// // print('firstFeat', firstFeat)
-
-
 var listfireApproxNBR = listfireApprox.map(prepareDNBRGeneration);
-//print('listfireApproxNBR', listfireApproxNBR)
 var size = listfireApproxNBR.size().getInfo();
 
 var startIndex = 80;
