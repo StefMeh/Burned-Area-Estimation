@@ -83,3 +83,27 @@ for file in os.listdir(os.getcwd()):
 
         layer.commitChanges()
 
+        processing.run("native:dissolve", {'INPUT':'BAProj'+clusterId+'.shp',
+                                           'FIELD' : [],
+                                           'SEPARATE_DISJOINT':False,
+                                           'OUTPUT':'BADissolve'+clusterId+'.shp'})
+        
+        processing.run("native:fieldcalculator",
+                       {'INPUT':'BADissolve'+clusterId+'.shp',
+                        'FIELD_NAME':'Area(sqkm)',
+                        'FIELD_TYPE':0,'FIELD_LENGTH':0,
+                        'FIELD_PRECISION':0,
+                        'FORMULA':' $area ',
+                        'OUTPUT':'Area'+clusterId+'.shp'})
+
+area_layer_list = []
+
+for file in os.listdir(os.getcwd()):
+    if file.startswith('Area') & file.endswith('.shp'):
+        area_layer_list.append(file)
+
+processing.run("native:mergevectorlayers",
+               {'LAYERS':area_layer_list,
+                'CRS':QgsCoordinateReferenceSystem('EPSG:32637'),
+                'OUTPUT':'BA_Record.shp'})
+
