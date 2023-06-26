@@ -57,9 +57,9 @@ for file in os.listdir(os.getcwd()):
 
         dst_layer = dst_ds.CreateLayer(dst_layername, srs = sp_ref )
 
-        fld = ogr.FieldDefn("BA(sqkm)", ogr.OFTInteger)
+        fld = ogr.FieldDefn("Class", ogr.OFTInteger)
         dst_layer.CreateField(fld)
-        dst_field = dst_layer.GetLayerDefn().GetFieldIndex("BA(sqkm)")
+        dst_field = dst_layer.GetLayerDefn().GetFieldIndex("Class")
 
         gdal.Polygonize(srcband, None, dst_layer, dst_field, [], callback=None )
 
@@ -76,7 +76,7 @@ for file in os.listdir(os.getcwd()):
         # Remove 'No Burn' class from .shp file #
         layer = QgsVectorLayer('BAProj'+clusterId+'.shp', "BA"+clusterId, "ogr")
         layer.startEditing()        
-        selection = QgsFeatureRequest().setFilterExpression('"BA(sqkm)" != 1')
+        selection = QgsFeatureRequest().setFilterExpression('"Class" != 1')
 
         for feature in layer.getFeatures(selection):
             layer.deleteFeature(feature.id())
