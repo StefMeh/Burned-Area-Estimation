@@ -53,16 +53,16 @@ var prepareDNBRGeneration = function (envelope) {
   // print('layerName', layerName);
 
   // Get Unique Feature ID
-  var featID = envelope.get('ClusterID');
+  var featID = envelope.get('CLUSTER_ID');
   // print('featID', featID);
   
     // Pre-fire start and end date definition
-  var cluster_start_date = ee.Date(envelope.get('StartDate'));
+  var cluster_start_date = ee.Date(envelope.get('START_TIME'));
   var pre_fire_start_date = (cluster_start_date.advance(-120, 'day'));
   var pre_fire_end_date = (cluster_start_date.advance(-1, 'day'));
   
   // Post-fire start and end date definition
-  var cluster_end_date = ee.Date(envelope.get('EndDate'));
+  var cluster_end_date = ee.Date(envelope.get('END_TIME'));
   var post_fire_start_date = (cluster_end_date.advance(1, 'day'));
   var post_fire_end_date = (cluster_end_date.advance(120, 'day'));
 
