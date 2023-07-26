@@ -53,11 +53,9 @@ var prepareDNBRGeneration = function (envelope) {
   envelope = ee.Feature(envelope);
   // Which layer?
   var layerName = envelope.get('layerName');
-  // print('layerName', layerName);
-
+  
   // Get Unique Feature ID
   var featID = envelope.get('CLUSTER_ID');
-  // print('featID', featID);
   
   // Pre-fire start and end date definition
   var cluster_start_date = ee.Date(envelope.get('START_TIME'));          // If input file is generated through QGIS: Use 'Date'
