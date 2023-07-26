@@ -1,5 +1,4 @@
 // GEEFile(EPSG4326) file in GEE user's assets
-// 'fe' = Fire Events
 var fe = ee.FeatureCollection("users/user/GEEFileEPSG4326");
 
 // Landsat 7 & 8 Atmospherically Corrected Surface Reflectance Data Image Collections
