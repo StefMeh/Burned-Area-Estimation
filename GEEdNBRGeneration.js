@@ -48,7 +48,7 @@ fe = fe.map(function (f) {
   return f.set('layerName', LN);
 });
 
-// Main Code
+// Main Function
 var prepareDNBRGeneration = function (envelope) {
   envelope = ee.Feature(envelope);
   // Which layer?
