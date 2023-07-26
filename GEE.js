@@ -97,7 +97,6 @@ var prepareDNBRGeneration = function (envelope) {
 };
 
 
-
 var listfe = fe.toList(fe.size());
 
 var listfeNBR = listfe.map(prepareDNBRGeneration);
@@ -114,3 +113,5 @@ for (var i = startIndex; i<endIndex; i++) {
   var description = bandName.join("_");
   exportImage(image, description);
 }
+
+// For Batch export of GEE tasks refer to: https://github.com/gee-hydro/gee_monkey.git under 'Free Version'
