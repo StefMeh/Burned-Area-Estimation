@@ -60,12 +60,14 @@ var prepareDNBRGeneration = function (envelope) {
   // print('featID', featID);
   
   // Pre-fire start and end date definition
-  var cluster_start_date = ee.Date(envelope.get('START_TIME'));
+  var cluster_start_date = ee.Date(envelope.get('START_TIME'));          // If input file is generated through QGIS: Use 'Date'
+                                                                        // If input file is generated through ArcGISPro: Use 'START_TIME'
   var pre_fire_start_date = (cluster_start_date.advance(-120, 'day'));
   var pre_fire_end_date = (cluster_start_date.advance(-1, 'day'));
   
   // Post-fire start and end date definition
-  var cluster_end_date = ee.Date(envelope.get('END_TIME'));
+  var cluster_end_date = ee.Date(envelope.get('END_TIME'));              // If input file is generated through QGIS: Use 'Date'
+                                                                        // If input file is generated through ArcGISPro: Use 'END_TIME'
   var post_fire_start_date = (cluster_end_date.advance(1, 'day'));
   var post_fire_end_date = (cluster_end_date.advance(120, 'day'));
 
