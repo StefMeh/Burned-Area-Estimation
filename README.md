@@ -6,3 +6,8 @@ The repository provides code resources to estimate burned area based on a combin
 # dNBR Generation
 
 # Burned Area Extraction
+
+# Resources on Installations
+## ArcPy
+## QGIS
+## geemap
