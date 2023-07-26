@@ -38,7 +38,7 @@ cluster_buffers = 'stdbscanBuffers.shp'                     # <-- Buffers around
 cluster_buffers_dissolve = 'stdbscanBuffersDissolve.shp'    #
 cluster_info = 'stdbscanClusterInfo.shp'                    #
 finalOutput = 'finalOutput.shp'                             # <-- AFD clusters associated with area (buffers) & information from clustering.
-GEEUploadFile = 'GEEFile(EPSG4326).shp'                     # <-- Final file to be uploaded into GEE Asset (Coordinate System: WGS 84)
+GEEUploadFile = 'GEEFileEPSG4326.shp'                     # <-- Final file to be uploaded into GEE Asset (Coordinate System: WGS 84)
 
 ###Convert AFD.csv file into point layer (.shp file format)###
 #Table to Point Layer#
