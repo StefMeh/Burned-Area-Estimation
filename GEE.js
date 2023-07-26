@@ -1,8 +1,7 @@
-var mfrcl = ee.FeatureCollection("users/sm0162/Final_MFR_WGS1984");
+// GEEFile(EPSG4326) file in GEE user's assets
+var mfrcl = ee.FeatureCollection("users/user/GEEFileEPSG4326");
 
-// Cluster envelope layers
-Map.addLayer(mfrcl, {color: 'f04020'}, 'MFR Clusters Fires');
-
+// Landsat 7 & 8 Atmospherically Corrected Surface Reflectance Data Image Collections
 var L7 = ee.ImageCollection('LANDSAT/LE07/C02/T1_L2');
 var L8 = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2');
 
@@ -24,17 +23,20 @@ function  mask_landsat(image) {
   return image.updateMask(mask.eq(0)).set('date', date);
 }
 
+// Google Drive Export Function
+// Creates folder "dNBR_Output" in user's Google Drive
 function exportImage(image, description) {
   Export.image.toDrive({
     image: image,
     description: description,
     region: image.geometry(),
-    folder: 'MFR_dNBR_VIIRS_Grid',
+    folder: 'dNBR_Output',
     scale: 30,
     maxPixels: 1E13,
   });
 }
 
+// Function to generate dNBR
 function generateNBR (image) {
   return image.normalizedDifference(['NIR', 'SWIR2']).rename('NBR');
 }
@@ -45,7 +47,7 @@ mfrcl = mfrcl.map(function (f) {
   return f.set('layerName', mfrclLayerName);
 });
 
-
+// Main Code
 var prepareDNBRGeneration = function (envelope) {
   envelope = ee.Feature(envelope);
   // Which layer?
@@ -56,7 +58,7 @@ var prepareDNBRGeneration = function (envelope) {
   var featID = envelope.get('CLUSTER_ID');
   // print('featID', featID);
   
-    // Pre-fire start and end date definition
+  // Pre-fire start and end date definition
   var cluster_start_date = ee.Date(envelope.get('START_TIME'));
   var pre_fire_start_date = (cluster_start_date.advance(-120, 'day'));
   var pre_fire_end_date = (cluster_start_date.advance(-1, 'day'));
