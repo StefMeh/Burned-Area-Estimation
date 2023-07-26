@@ -1,5 +1,6 @@
 // GEEFile(EPSG4326) file in GEE user's assets
-var mfrcl = ee.FeatureCollection("users/user/GEEFileEPSG4326");
+// 'fe' = Fire Events
+var fe = ee.FeatureCollection("users/user/GEEFileEPSG4326");
 
 // Landsat 7 & 8 Atmospherically Corrected Surface Reflectance Data Image Collections
 var L7 = ee.ImageCollection('LANDSAT/LE07/C02/T1_L2');
@@ -41,10 +42,10 @@ function generateNBR (image) {
   return image.normalizedDifference(['NIR', 'SWIR2']).rename('NBR');
 }
 
-
-var mfrclLayerName = 'mfrcl';
-mfrcl = mfrcl.map(function (f) {
-  return f.set('layerName', mfrclLayerName);
+// Assign layer name property
+var LN = 'FireEvents';
+fe = fe.map(function (f) {
+  return f.set('layerName', LN);
 });
 
 // Main Code
@@ -69,66 +70,45 @@ var prepareDNBRGeneration = function (envelope) {
   var post_fire_end_date = (cluster_end_date.advance(120, 'day'));
 
   var preImageL7 = L7.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
-  // print('preImageL7', preImageL7);
   // preImageL7 = preImageL7.map(mask_landsat);
   var preImageL8 = L8.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
-  // print('preImageL8', preImageL8)
   // preImageL8 = preImageL8.map(mask_landsat);
   var preImage = ee.Algorithms.If(preImageL8.size().eq(0), preImageL7, preImageL7.merge(preImageL8));
   preImage = ee.ImageCollection(preImage).map(mask_landsat);
-  // print('preImage', preImage)
-  // var preImage = ee.Algorithms.If(preImageL8.size().eq(0), preImageL7, preImageL7.merge(preImageL8));
-  // var preImage = preImageL7.merge(preImageL8);
 
   var postImageL7 = L7.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
-  // print('postImageL7', postImageL7);
   // postImageL7 = postImageL7.map(mask_landsat);
   var postImageL8 = L8.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
-  // print('postImageL8', postImageL8);
   // postImageL8 = postImageL8.map(mask_landsat);
-  // var postImage = postImageL7.merge(postImageL8);
-  // var postImage = ee.Algorithms.If(postImageL8.size().eq(0), postImageL7, preImageL7.merge(postImageL8));
   var postImage = ee.Algorithms.If(postImageL8.size().eq(0), postImageL7, postImageL7.merge(postImageL8));
   postImage = ee.ImageCollection(postImage).map(mask_landsat);
-  // print('postImage', postImage)
 
   preImage = preImage.map(generateNBR);
-  // preImage = preImage.qualityMosaic('NBR').multiply(1000).rename('preImage_'+ layerName + '_' + featID);
   preImage = preImage.median().multiply(1000).rename([ee.String('preImage_').cat(layerName).cat('_').cat(featID)]);
+  // preImage = preImage.qualityMosaic('NBR').multiply(1000).rename('preImage_'+ layerName + '_' + featID);
 
   postImage = postImage.map(generateNBR);
-  // postImage = postImage.qualityMosaic('NBR').multiply(1000).rename('postImage_'+ layerName + '_' + featID);
   postImage = postImage.median().multiply(1000).rename([ee.String('postImage_').cat(layerName).cat('_').cat(featID)]);
-  
-  // exportImage(preImage, 'preImage_'+ layerName + '_' + featID);
-  
+  // postImage = postImage.qualityMosaic('NBR').multiply(1000).rename('postImage_'+ layerName + '_' + featID);
+    
   var dNBR = preImage.subtract(postImage).rename([ee.String('dNBR_').cat(layerName).cat('_').cat(featID)])
-  // var image = preImage.addBands(postImage).addBands(dNBR);
   var image = dNBR
   return image.clip(envelope.geometry());
 };
 
 
 
-var listMfrCl = mfrcl.toList(mfrcl.size());
+var listfe = fe.toList(fe.size());
 
-// var firstFeat = bufcl.first();
-// var firstFeat = ee.Feature(listBufCl.get(2));
-// Map.addLayer(firstFeat)
-// firstFeat = prepareDNBRGeneration(firstFeat);
-// // print('firstFeat', firstFeat)
+var listfeNBR = listfe.map(prepareDNBRGeneration);
+print('listfeNBR', listfeNBR)
+var size = listfeNBR.size().getInfo();
 
-
-var listMfrClNBR = listMfrCl.map(prepareDNBRGeneration);
-print('listMfrClNBR', listMfrClNBR)
-var size = listMfrClNBR.size().getInfo();
-// print('listBufClNBR', listBufClNBR);
-
+// For large files (> 100 fire events) break up exports to be generated using startIndex & endIndex
 var startIndex = 0;
 var endIndex = 10;
 for (var i = startIndex; i<endIndex; i++) {
-  print(i)
-  var image = ee.Image(listMfrClNBR.get(i));
+  var image = ee.Image(listfeNBR.get(i));
   var bandName = image.bandNames().getInfo()[0].split('_');
   bandName.shift();
   var description = bandName.join("_");
