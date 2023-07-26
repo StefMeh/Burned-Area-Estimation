@@ -24,7 +24,7 @@ cluster_buffers = 'stdbscanBuffers.shp'
 cluster_buffers_dissolve = 'stdbscanBuffersDissolve.shp'
 cluster_info = 'stdbscanClusterInfo.shp'
 finalOutput = 'finalOutput.shp'
-GEEUploadFile = 'GEEFile(EPSG4326).shp'
+GEEUploadFile = 'GEEFileEPSG4326.shp'
 
 
 ###Convert AFD.csv file into point layer (.shp file format)###
