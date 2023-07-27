@@ -1,5 +1,5 @@
 import os
-os.chdir(r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\updatedMFRdbscan') # <-- Specify working directory here!!!
+os.chdir(r'C:\Users\user\...\Folder') # <-- Specify working directory here!!!
 
 import arcpy
 from arcpy.sa import *
@@ -9,8 +9,8 @@ import pandas as pd
 arcpy.env.overwriteOutput = True
 
 ### Files ###
-input_csv = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\updatedMFRdbscan\Kenya2012-2022.csv'
-study_area_shp = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\MFR_Forest\Forest_Reserve\MFR_Forest_Reserve.shp'
+input_csv = r'C:\Users\user\...\Kenya2012-2022.csv'
+study_area_shp = r'C:\Users\user\...\MFR_Forest_Reserve.shp'
 
 afd_pts = 'AFDs.shp'
 afd_ptsEPSG4326 = 'AFDsEPSG4326.shp'
