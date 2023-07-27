@@ -1,6 +1,6 @@
 ### Import os package & specify working directory ###
 import os
-os.chdir(r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\QGIS_Scripts\BA_dNBR') # <-- Specify working directory here!!!
+os.chdir(r'C:\Users\user\...\BA_dNBR') # <-- Specify working directory here!!!
 # BA_dNBR directory contains GEE dNBR output files (.tif format) #
 
 ### Import packages from QGIS ###
