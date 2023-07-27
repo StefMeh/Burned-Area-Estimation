@@ -9,12 +9,16 @@ The repository provides code resources to estimate burned area based on a combin
 
 # Burned Area Extraction
 
-# Resources on Installations
-## Anaconda
+# Resources on Installations & Accounts
+## Accounts
+### Google Earth Engine
+https://earthengine.google.com/
+## Installations
+### Anaconda
 https://docs.anaconda.com/free/anaconda/install/
-## ArcPy
+### ArcPy
 https://pro.arcgis.com/en/pro-app/latest/arcpy/get-started/installing-arcpy.htm
-## QGIS
+### QGIS
 https://anaconda.org/conda-forge/qgis
-## geemap
+### geemap
 https://github.com/gee-community/geemap.git
