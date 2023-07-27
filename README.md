@@ -2,6 +2,7 @@
 The repository provides code resources to estimate burned area based on a combination of VIIRS Active Fire Detections (AFDs), acquired from NASA's Fire Information for Resource Management System (FIRMS), part of NASA's Earth Observing System Data and Information System (EOSDIS), and Landsat 7 &amp; 8 atmospherically corrected surface reflectance data made available through the US Geological Survey (USGS), and accessible through the Google Earth Engine (GEE) platform.
 
 # Introduction
+Global burned area products show high errors of commission in agricultural settings related to subsidence farming, involving anthropogenic fire activity for land clearing and field preparation, pre- and post-harvest. Burned areas < 100 hectares are laregely not registered by global burned area products, and not accounted for in land management or national to global greehouse gas inventories. This is an issue especially in low-income countries, where resources are limited to develop continuous operational fire and burned area monitoring services based on higher spatial resolution data (20 - 30 meter spatial resolution). 
 
 # Data Acquisition
 Active Fire Detections Download -> NASA FIRMS: https://firms.modaps.eosdis.nasa.gov/download/
@@ -21,7 +22,7 @@ Either an ArcPy or QGIS python environment.
 * ST-DBSCAN Clustering (QGIS): https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#st-dbscan-clustering
 
 ## Further Resources
-ST-DBSCAN
+(ST-)DBSCAN
 * Ester, Martin, et al. "A density-based algorithm for discovering clusters in large spatial databases with noise." kdd. Vol. 96. No. 34. 1996.
 * Birant, Derya, and Alp Kut. "ST-DBSCAN: An algorithm for clustering spatial–temporal data." Data & knowledge engineering 60.1 (2007): 208-221.
 
