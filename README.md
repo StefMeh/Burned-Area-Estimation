@@ -3,10 +3,28 @@ The repository provides code resources to estimate burned area based on a combin
 
 # Introduction
 
-# Fire Event & Duration Approximation
-## Data
-AFDs
-(https://earthdata.nasa.gov/firms)
+# Data Acquisition
+Active Fire Detections Download -> NASA FIRMS: https://firms.modaps.eosdis.nasa.gov/download/
+
+# Fire Events & Duration Approximation
+Active Fire Detections are spatio-temporally clustered to add information to the data by developing an estimate of individual fire events. Spatio-temporal clustering allows to assign approximate fire start- and end dates, based on AFDs' acquisition dates, and an approximate fire extent, based on AFDs' spatial resolution to estimated fire events.
+
+Spatio-temporal clustering is performed using the Density-based Clustering tool in ArcGIS Pro, or the ST-DBSCAN Clustering tool in QGIS. The tool performs ST-DBSCAN (Spatio-Temporal Density-Based Spatial Clustering of Applications with Noise), a clustering algorithm for vector data originally developed by Ester et al. (1996) and further developed by Birant & Kut (2007).
+
+## Documentation
+Density-based Clustering (ArcGIS Pro): https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/densitybasedclustering.htm
+ST-DBSCAN Clustering (QGIS): https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#st-dbscan-clustering
+
+
+
+(Use either stdbscanArcGISPro3.py or stdbscanQGIS.py)
+
+## Further Resources:
+Ester, Martin, et al. "A density-based algorithm for discovering clusters in large spatial databases with noise." kdd. Vol. 96. No. 34. 1996.
+Birant, Derya, and Alp Kut. "ST-DBSCAN: An algorithm for clustering spatial–temporal data." Data & knowledge engineering 60.1 (2007): 208-221.
+
+Humber, Michael, Maria Zubkova, and Louis Giglio. "A remote sensing-based approach to estimating the fire spread rate parameter for individual burn patch extraction." International Journal of Remote Sensing 43.2 (2022): 649-673.
+Artés, Tomàs, et al. "A global wildfire dataset for the analysis of fire regimes and fire behaviour." Scientific data 6.1 (2019): 296.
 
 # dNBR Generation
 
