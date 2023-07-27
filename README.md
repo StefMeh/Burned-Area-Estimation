@@ -56,7 +56,7 @@ NBR / dNBR
 * Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
 
 # Workflow
-
+![GitHubWorkflow](https://github.com/StefMeh/Burned-Area-Estimation/assets/135348279/cebcc615-5e88-424c-bfaa-cd73aa8a1c28)
 
 # Resources on Installations & Accounts
 ## Accounts
