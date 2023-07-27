@@ -13,6 +13,9 @@ Spatio-temporal clustering can be performed using the Density-based Clustering t
 
 (Use either stdbscanArcGISPro3.py or stdbscanQGIS.py)
 
+## Requirements
+Either an ArcPy or QGIS python environment.
+
 ## Tool Documentation
 * Density-based Clustering (ArcGIS Pro): https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/densitybasedclustering.htm
 * ST-DBSCAN Clustering (QGIS): https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#st-dbscan-clustering
@@ -31,6 +34,9 @@ The approximate extent of spatio-temporal clusters of AFDs is integrated into a 
 
 (Use either GEEdNBRGeneration.js or JNdNBRGeneration.ipynb)
 
+## Requirements
+A Google Earth Engine account, or a Google Earth Engine account and a geemap python environment.
+
 ## Further Resources
 NBR / dNBR
 * Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
@@ -40,6 +46,9 @@ NBR / dNBR
 Derived burn severity (dNBR) is classified based on the classification system for dNBR by Key & Benson (2006). Burn perimeters are extracted for a severity classification of low to high severity.
 
 (Use either dNBRProcessingArcGISPro3.py or dNBRProcessingQGIS.py)
+
+## Requirements
+Either an ArcPy or QGIS python environment.
 
 ## Further Resources
 NBR / dNBR
