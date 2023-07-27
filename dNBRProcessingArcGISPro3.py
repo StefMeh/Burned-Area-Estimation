@@ -1,5 +1,5 @@
 import os
-os.chdir(r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\updatedMFRdbscan\MFR(d)NBR') # <-- Specify working directory here!!!
+os.chdir(r'C:\Users\user\...\dNBR_Outputs') # <-- Specify working directory here!!!
 
 import arcpy
 from arcpy.sa import *
