@@ -31,7 +31,7 @@ ST-DBSCAN in Fire Research
 * Artés, Tomàs, et al. "A global wildfire dataset for the analysis of fire regimes and fire behaviour." Scientific data 6.1 (2019): 296.
 
 # (2) dNBR Generation
-The approximate extent of spatio-temporal clusters of AFDs is integrated into a cloud-based Google Earth Engine (GEE) workflow, assessing Landsat atmospherically corrected surface reflectance data to calculate differenced Normalized Burn Ratio (dNBR). Imagery is acquired for uniform pre- and post-fire periods of 120 days, respectively, and averaged, before calculating dNBR.
+The approximate extent of spatio-temporal clusters of AFDs is integrated into a cloud-based Google Earth Engine (GEE) workflow, assessing Landsat atmospherically corrected surface reflectance data to calculate differenced Normalized Burn Ratio (dNBR). Imagery is acquired for uniform pre- and post-fire periods and averaged before calculating dNBR.
 
 (Use either GEEdNBRGeneration.js or JNdNBRGeneration.ipynb)
 
