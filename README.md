@@ -32,6 +32,7 @@ The approximate extent of spatio-temporal clusters of AFDs is integrated into a 
 (Use either GEEdNBRGeneration.js or JNdNBRGeneration.ipynb)
 
 ## Further Resources
+NBR / dNBR
 * Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
 * Miller, Jay D., and Andrea E. Thode. "Quantifying burn severity in a heterogeneous landscape with a relative version of the delta Normalized Burn Ratio (dNBR)." Remote sensing of Environment 109.1 (2007): 66-80.
 
@@ -41,6 +42,7 @@ Derived burn severity (dNBR) is classified based on the classification system fo
 (Use either dNBRProcessingArcGISPro3.py or dNBRProcessingQGIS.py)
 
 ## Further Resources
+NBR / dNBR
 * Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
 
 # Resources on Installations & Accounts
