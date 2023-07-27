@@ -18,11 +18,13 @@ Spatio-temporal clustering can be performed using the Density-based Clustering t
 * ST-DBSCAN Clustering (QGIS): https://docs.qgis.org/3.28/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#st-dbscan-clustering
 
 ## Further Resources
-Ester, Martin, et al. "A density-based algorithm for discovering clusters in large spatial databases with noise." kdd. Vol. 96. No. 34. 1996.
-Birant, Derya, and Alp Kut. "ST-DBSCAN: An algorithm for clustering spatial–temporal data." Data & knowledge engineering 60.1 (2007): 208-221.
+ST-DBSCAN
+* Ester, Martin, et al. "A density-based algorithm for discovering clusters in large spatial databases with noise." kdd. Vol. 96. No. 34. 1996.
+* Birant, Derya, and Alp Kut. "ST-DBSCAN: An algorithm for clustering spatial–temporal data." Data & knowledge engineering 60.1 (2007): 208-221.
 
-Humber, Michael, Maria Zubkova, and Louis Giglio. "A remote sensing-based approach to estimating the fire spread rate parameter for individual burn patch extraction." International Journal of Remote Sensing 43.2 (2022): 649-673.
-Artés, Tomàs, et al. "A global wildfire dataset for the analysis of fire regimes and fire behaviour." Scientific data 6.1 (2019): 296.
+ST-DBSCAN in Fire Research
+* Humber, Michael, Maria Zubkova, and Louis Giglio. "A remote sensing-based approach to estimating the fire spread rate parameter for individual burn patch extraction." International Journal of Remote Sensing 43.2 (2022): 649-673.
+* Artés, Tomàs, et al. "A global wildfire dataset for the analysis of fire regimes and fire behaviour." Scientific data 6.1 (2019): 296.
 
 # dNBR Generation
 The approximate extent of spatio-temporal clusters of AFDs is integrated into a cloud-based Google Earth Engine (GEE) workflow, assessing Landsat atmospherically corrected surface reflectance data to calculate differenced Normalized Burn Ratio (dNBR). Imagery is acquired for uniform pre- and post-fire periods of 120 days, respectively, and averaged, before calculating dNBR.
@@ -30,8 +32,8 @@ The approximate extent of spatio-temporal clusters of AFDs is integrated into a 
 (Use either GEEdNBRGeneration.js or JNdNBRGeneration.ipynb)
 
 ## Further Resources
-Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
-Miller, Jay D., and Andrea E. Thode. "Quantifying burn severity in a heterogeneous landscape with a relative version of the delta Normalized Burn Ratio (dNBR)." Remote sensing of Environment 109.1 (2007): 66-80.
+* Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
+* Miller, Jay D., and Andrea E. Thode. "Quantifying burn severity in a heterogeneous landscape with a relative version of the delta Normalized Burn Ratio (dNBR)." Remote sensing of Environment 109.1 (2007): 66-80.
 
 # Burned Area Extraction
 Derived burn severity (dNBR) is classified based on the classification system for dNBR by Key & Benson (2006). Burn perimeters are extracted for a severity classification of low to high severity.
@@ -39,7 +41,7 @@ Derived burn severity (dNBR) is classified based on the classification system fo
 (Use either dNBRProcessingArcGISPro3.py or dNBRProcessingQGIS.py)
 
 ## Further Resources
-Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
+* Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
 
 # Resources on Installations & Accounts
 ## Accounts
