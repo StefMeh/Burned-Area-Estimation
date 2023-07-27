@@ -71,3 +71,5 @@ https://pro.arcgis.com/en/pro-app/latest/arcpy/get-started/installing-arcpy.htm
 https://anaconda.org/conda-forge/qgis
 ### geemap
 https://github.com/gee-community/geemap.git
+
+# Acknowlegements
