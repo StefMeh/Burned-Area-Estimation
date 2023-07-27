@@ -8,11 +8,7 @@ import pandas as pd
 
 arcpy.env.overwriteOutput = True
 
-###Documentation Density-based clustering tool in arcpy###
-#--- https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-statistics/densitybasedclustering.htm ---#
-
 ### Files ###
-#input_csv = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\VIIRS_Fires\viirs_2012_Kenya.csv' # <-- NASA FIRMS VIIRS AFD.csv file for Kenya
 input_csv = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\updatedMFRdbscan\Kenya2012-2022.csv'
 study_area_shp = r'C:\Users\Stephanie\Documents\Thesis\Thesis_Data\MFR_Forest\Forest_Reserve\MFR_Forest_Reserve.shp'
 
