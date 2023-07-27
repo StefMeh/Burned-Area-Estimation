@@ -51,6 +51,10 @@ Derived burn severity (dNBR) is classified based on the classification system fo
 ## Requirements
 Either an ArcPy or QGIS python environment.
 
+# Workflow
+
+![WorkflowPaper](https://github.com/StefMeh/Burned-Area-Estimation/assets/135348279/c0ec4071-1d6c-41fd-b13b-709cdac2b046)
+
 ## Further Resources
 NBR / dNBR
 * Key, Carl H., and Nathan C. Benson. "Landscape assessment (LA)." FIREMON: Fire effects monitoring and inventory system 164 (2006): LA-1.
