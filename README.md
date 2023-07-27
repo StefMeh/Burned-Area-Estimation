@@ -7,7 +7,7 @@ The repository provides code resources to estimate burned area based on a combin
 Active Fire Detections Download -> NASA FIRMS: https://firms.modaps.eosdis.nasa.gov/download/
 
 # Fire Events & Duration Approximation
-Active Fire Detections (AFDs) are spatio-temporally clustered to add information to the data by developing an estimate of individual fire events. Spatio-temporal clustering allows to assign approximate fire start- and end dates, based on AFDs' acquisition dates, and an approximate fire extent, based on AFDs' spatial resolution (375 meters) to estimated fire events.
+Active Fire Detections (AFDs) are spatio-temporally clustered to add information to the data by developing an estimate of individual fire events. Spatio-temporal clustering allows to assign approximate fire start- and end dates, based on AFDs' acquisition dates, and an approximate fire extent, based on AFDs' spatial resolution (375 meters) to estimate fire events.
 
 Spatio-temporal clustering can be performed using the Density-based Clustering tool in ArcGIS Pro, or the ST-DBSCAN Clustering tool in QGIS. The tool performs ST-DBSCAN (Spatio-Temporal Density-Based Spatial Clustering of Applications with Noise), a clustering algorithm for vector data originally developed by Ester et al. (1996) and further developed by Birant & Kut (2007).
 
