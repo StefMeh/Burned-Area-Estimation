@@ -79,6 +79,9 @@ The resources in this repository were developed as part of a Master's Thesis res
 ## Abstract
 Kenya is frequently subject to fire activity. Natural fire occurrence is part of and beneficial to most of the country’s ecosystems. However, anthropogenic activities associated with agricultural practices increasingly introduce fire activity to ecosystems that are not fire adapted, such as forest systems. Registration of small-size burned areas below an extent of 1 square kilometer, especially from fires in mixed agricultural-forest interfaces, is a substantial gap in currently available products. Addressing this issue, an improved spatial resolution fire burned area product was generated, based on VIIRS Active Fire Detections and Landsat Surface Reflectance data products, and used to characterize fire activity and its role in land cover land use change dynamics in the Mau Forest Reserve in Kenya. Detection information on fire events and burned areas increased between 85 to 100 % and 53 to 100 %, respectively, greatly affecting intact parts of the forest.
 
+## Link
+https://louis.uah.edu/uah-theses/471
+
 ## Citation
 Mehlich, Stefanie, "The role of the anthropogenic fire regime in protected areas in Kenya : a case study in the Mau Forest region" (2023). Theses. 471.
 https://louis.uah.edu/uah-theses/471
