@@ -1,5 +1,13 @@
+// ********************************************************************************************************************************************** //
+// This script uses the output file (GEEFileEPSG4326.shp) from the spatio-temporal clustering process of VIIRS active fire detections (AFDs),
+// which should be uploaded to the user's Google Earth Engine asset. The script generates dNBR outputs for approximates burned area events
+// based on clusters of active fire detections. The dNBR outputs are exported to the user's Google Drive under the 'dNBR_Output' folder.
+// The folder needs to be downloaded by the user to complete the final burned area extraction process.
+// The user needs/ can adjust the script where recommended (# <--).
+// ********************************************************************************************************************************************** //
+
 // GEEFile(EPSG4326) file in GEE user's assets
-var fe = ee.FeatureCollection("users/user/GEEFileEPSG4326");
+var fe = ee.FeatureCollection("users/user/GEEFileEPSG4326");                                // <-- Replace 'user' with user's individual GEE ID
 
 // Landsat 7 & 8 Atmospherically Corrected Surface Reflectance Data Image Collections
 var L7 = ee.ImageCollection('LANDSAT/LE07/C02/T1_L2');
