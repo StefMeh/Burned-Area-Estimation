@@ -1,3 +1,9 @@
+# ************************************************************************************************************************************************************************************* #
+# This script performs spatio-temporal clustering of VIIRS active fire detections (AFDs), based on the ST-DBSCAN (Spatio-Temporal Density-Based Spatial Clustering of Applications with
+# Noise), using the ST-DBSCAN Clustering tool in the QGIS python environment. The script genererates an output shapefile (GEEFileEPSG4326.shp), which needs to be uploaded into the 
+# user's Google Earth Engine asset. The user needs/ can adjust the script where recommended (# <--).
+# ************************************************************************************************************************************************************************************* #
+
 ### Import os package & specify working directory ###
 import os
 os.chdir(r'C:\Users\user\Documents\.....\BA') # <-- Specify working directory here!!!
@@ -25,8 +31,8 @@ from qgis.core import (
 
 
 ### Files ###
-input_csv = r'C:\Users\user\Documents\....\viirs_2012_Kenya.csv' # <-- NASA FIRMS VIIRS AFD.csv file for Kenya: Download: https://firms.modaps.eosdis.nasa.gov/country/
-study_area_shp = r'C:\Users\user\Documents\...\StudyArea.shp' # <-- Shapefile of specific study area to clip AFDs (if applicable)
+input_csv = r'C:\Users\user\Documents\....\viirs_2012_Kenya.csv'  # <-- NASA FIRMS VIIRS AFD.csv file for Kenya: Download: https://firms.modaps.eosdis.nasa.gov/country/
+study_area_shp = r'C:\Users\user\Documents\...\StudyArea.shp'     # <-- Shapefile of specific study area to clip AFDs (if applicable)
 
 ### Naming of Output Files ###
 # File names can be changed here #
@@ -38,7 +44,7 @@ cluster_buffers = 'stdbscanBuffers.shp'                     # <-- Buffers around
 cluster_buffers_dissolve = 'stdbscanBuffersDissolve.shp'    #
 cluster_info = 'stdbscanClusterInfo.shp'                    #
 finalOutput = 'finalOutput.shp'                             # <-- AFD clusters associated with area (buffers) & information from clustering.
-GEEUploadFile = 'GEEFileEPSG4326.shp'                     # <-- Final file to be uploaded into GEE Asset (Coordinate System: WGS 84)
+GEEUploadFile = 'GEEFileEPSG4326.shp'                       # <-- Final file to be uploaded into GEE Asset (Coordinate System: WGS 84)
 
 ###Convert AFD.csv file into point layer (.shp file format)###
 #Table to Point Layer#
