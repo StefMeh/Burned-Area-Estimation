@@ -1,3 +1,9 @@
+# ************************************************************************************************************************************************************************************* #
+# This script extracts burned area from dNBR outputs downloaded from the user's Google Drive, using ArcGIS Pro arcpy python environment. The script genererates an output shapefile
+# (BurnedAreaAtlas.shp) of extracted burned areas with an individual identifier, approximated start- and end dates, and duration.
+# The user needs/ can adjust the script where recommended (# <--).
+# ************************************************************************************************************************************************************************************* #
+
 import os
 os.chdir(r'C:\Users\user\...\dNBR_Outputs') # <-- Specify working directory here!!!
 
