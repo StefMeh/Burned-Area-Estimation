@@ -12,6 +12,7 @@ var fe = ee.FeatureCollection("users/user/GEEFileEPSG4326");                    
 // Landsat 7 & 8 Atmospherically Corrected Surface Reflectance Data Image Collections
 var L7 = ee.ImageCollection('LANDSAT/LE07/C02/T1_L2');
 var L8 = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2');
+var L9 = ee.ImageCollection('LANDSAT/LC09/C02/T1_L2');
 
 // Landsat Masking Function
 function  mask_landsat(image) {
@@ -66,28 +67,36 @@ var prepareDNBRGeneration = function (envelope) {
   
   // Pre-fire start and end date definition
   var cluster_start_date = ee.Date(envelope.get('START_TIME'));          // If input file is generated through QGIS: Use 'Date'
-                                                                        // If input file is generated through ArcGISPro: Use 'START_TIME'
-  var pre_fire_start_date = (cluster_start_date.advance(-120, 'day'));
+                                                                         // If input file is generated through ArcGISPro: Use 'START_TIME'
+  var pre_fire_start_date = (cluster_start_date.advance(-120, 'day'));  // Adjust length of pre-fire period if wanted.
   var pre_fire_end_date = (cluster_start_date.advance(-1, 'day'));
   
   // Post-fire start and end date definition
   var cluster_end_date = ee.Date(envelope.get('END_TIME'));              // If input file is generated through QGIS: Use 'Date'
                                                                         // If input file is generated through ArcGISPro: Use 'END_TIME'
   var post_fire_start_date = (cluster_end_date.advance(1, 'day'));
-  var post_fire_end_date = (cluster_end_date.advance(120, 'day'));
+  var post_fire_end_date = (cluster_end_date.advance(120, 'day'));      // Adjust length of post-fire period if wanted.
 
   var preImageL7 = L7.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
   // preImageL7 = preImageL7.map(mask_landsat);
   var preImageL8 = L8.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
   // preImageL8 = preImageL8.map(mask_landsat);
-  var preImage = ee.Algorithms.If(preImageL8.size().eq(0), preImageL7, preImageL7.merge(preImageL8));
+  var preImageL9 = L9.filterBounds(envelope.geometry()).filterDate(pre_fire_start_date, pre_fire_end_date);
+    
+  var preImageL8L9 = preImageL8.merge(preImageL9)
+  
+  var preImage = ee.Algorithms.If(preImageL8L9.size().eq(0), preImageL7, preImageL8L9);
   preImage = ee.ImageCollection(preImage).map(mask_landsat);
 
   var postImageL7 = L7.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
   // postImageL7 = postImageL7.map(mask_landsat);
   var postImageL8 = L8.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
   // postImageL8 = postImageL8.map(mask_landsat);
-  var postImage = ee.Algorithms.If(postImageL8.size().eq(0), postImageL7, postImageL7.merge(postImageL8));
+  var postImageL9 = L9.filterBounds(envelope.geometry()).filterDate(post_fire_start_date, post_fire_end_date);
+
+  var postImageL8L9 = postImageL8.merge(postImageL9)
+  
+  var postImage = ee.Algorithms.If(postImageL8L9.size().eq(0), postImageL7, postImageL8L9);
   postImage = ee.ImageCollection(postImage).map(mask_landsat);
 
   preImage = preImage.map(generateNBR);
