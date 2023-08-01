@@ -1,3 +1,9 @@
+# ************************************************************************************************************************************************************************************* #
+# This script extracts burned area from dNBR outputs downloaded from the user's Google Drive, using the QGIS python environment. The script genererates an output shapefile
+# (BurnedAreaAtlas.shp) of extracted burned areas with an individual identifier and an approximated start date.
+# The user needs/ can adjust the script where recommended (# <--).
+# ************************************************************************************************************************************************************************************* #
+
 ### Import os package & specify working directory ###
 import os
 os.chdir(r'C:\Users\user\...\dNBR_Outputs') # <-- Specify working directory here!!!
