@@ -1,3 +1,9 @@
+# ************************************************************************************************************************************************************************************* #
+# This script performs spatio-temporal clustering of VIIRS active fire detections (AFDs), based on the ST-DBSCAN (Spatio-Temporal Density-Based Spatial Clustering of Applications with
+# Noise), using the Density-based Clustering tool in ArcGIS Pro, the arcpy python environment. The script genererates an output shapefile (GEEFileEPSG4326.shp), which needs to be uploaded into the 
+# user's Google Earth Engine asset. The user needs/ can adjust the script where recommended (# <--).
+# ************************************************************************************************************************************************************************************* #
+
 import os
 os.chdir(r'C:\Users\user\...\Folder') # <-- Specify working directory here!!!
 
