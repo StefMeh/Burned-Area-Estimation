@@ -4,7 +4,7 @@ The repository provides code resources to estimate burned area based on a combin
 # Introduction
 Global burned area products show high errors of commission in agricultural settings related to subsidence farming, involving anthropogenic fire activity for land clearing and field preparation, pre- and post-harvest. Burned areas < 100 hectares are laregely not registered by global burned area products, and not accounted for in land management or national to global greehouse gas inventories. This is an issue especially in low-income countries, where resources are limited to develop continuous operational fire and burned area monitoring services based on higher spatial resolution data (20 - 30 meter spatial resolution). The repository provides open-source resources to generate information on fire events and associated burned area over any study area, to support higher accuracy burned area monitoring.
 
-# Data
+# Input Data
 Active Fire Detections Download -> NASA FIRMS: https://firms.modaps.eosdis.nasa.gov/download/
 
 # (1) Fire Events & Duration Approximation
