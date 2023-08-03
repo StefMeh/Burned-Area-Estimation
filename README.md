@@ -86,7 +86,7 @@ https://louis.uah.edu/uah-theses/471
 Mehlich, Stefanie, "The role of the anthropogenic fire regime in protected areas in Kenya : a case study in the Mau Forest region" (2023). Theses. 471.
 
 ## Data Availability
-Output data from this thesis research can be found under: 
+Output data from this thesis research can be found under: https://doi.org/10.5281/zenodo.8212851
 
 ## Data Citation
-https://louis.uah.edu/uah-theses/471
+Mehlich, Stefanie. (2023). Moderate Spatial Resolution Burned Area Atlas for the Mau Forest Reserve in Kenya (2012 - 2017) (Version v1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8212851
