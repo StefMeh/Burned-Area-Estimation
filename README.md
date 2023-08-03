@@ -73,7 +73,7 @@ https://anaconda.org/conda-forge/qgis
 https://github.com/gee-community/geemap.git
 
 # Acknowlegements
-The resources in this repository were developed as part of a Master's Thesis research project. This research was made possible and supported by SERVIR, a joint initiative between the National Aeronautic Space Administration (NASA) and the U.S. Agency for International Development (USAID), and the NASA Applied Sciences Capacity Building Program. Funding was provided through the Cooperative Agreement 80MSFC22M0004 between NASA and the University of Alabama in Huntsville (UAH).
+The resources in this repository were based on part of a Master's Thesis research project. This research was made possible and supported by SERVIR, a joint initiative between the National Aeronautic Space Administration (NASA) and the U.S. Agency for International Development (USAID), and the NASA Applied Sciences Capacity Building Program. Funding was provided through the Cooperative Agreement 80MSFC22M0004 between NASA and the University of Alabama in Huntsville (UAH).
 
 # Thesis
 ## Abstract
